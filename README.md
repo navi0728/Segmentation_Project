@@ -16,9 +16,9 @@ python train.py
 ## Results  
 
 ### Prediction
-<img src=https://github.com/navi0728/Segmentation_Project/blob/main/unet_tiktok/assets/output1.png width="800" height="300"/>
+<img src=https://github.com/navi0728/Segmentation_Project/blob/main/unet_tiktok/assets/output1.png width="750" height="300"/>
 
-<img src=https://github.com/navi0728/Segmentation_Project/blob/main/unet_tiktok/assets/output2.png width="800" height="300"/>
+<img src=https://github.com/navi0728/Segmentation_Project/blob/main/unet_tiktok/assets/output2.png width="750" height="300"/>
 
 ### Training Loss Results
 <img src=https://github.com/navi0728/Segmentation_Project/blob/main/unet_tiktok/assets/training_loss_trend.png width="700" height="300"/>
