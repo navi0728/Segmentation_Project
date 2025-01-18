@@ -1,1 +1,11 @@
-project_root/ │── data/ # 데이터 폴더 │ ├── images/ # 원본 이미지 저장 폴더 │ ├── masks/ # 마스크 데이터 저장 폴더 │ │── new_results/ # 새로운 결과물 저장 폴더 │── results/ # 기존 결과물 저장 폴더 │ │── dataset.py # 데이터 로드 및 전처리 스크립트 │── model.py # 모델 정의 및 학습 관련 코드 │── new_results.py # 새로운 결과를 저장하는 코드 │── show.py # 시각화 및 결과 확인 코드 │── train.py # 모델 학습 스크립트
+.
+├── date
+│   ├── images
+│   └── masks
+├── new_results
+├── results
+├── dataset.py
+├── model.py
+├── new_results.py
+├── show.py
+└── train.py
