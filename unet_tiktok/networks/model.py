@@ -4,12 +4,12 @@ import torch.nn.functional as F
 
 
 class encoder_block(nn.Module):
-    def __init__(self, in_ch, out_ch, dilation):
+    def __init__(self, in_ch, out_ch):
         super().__init__()
-        self.conv1 = nn.Conv2d(in_ch, out_ch, kernel_size=3, stride=1, padding=dilation, dilation=dilation)  
+        self.conv1 = nn.Conv2d(in_ch, out_ch, kernel_size=3, stride=1, padding=1)  
         self.bn1 = nn.BatchNorm2d(out_ch)
         self.relu1 = nn.ReLU()
-        self.conv2 = nn.Conv2d(out_ch, out_ch, kernel_size=3, stride=1, padding=dilation, dilation=dilation) 
+        self.conv2 = nn.Conv2d(out_ch, out_ch, kernel_size=3, stride=1, padding=1) 
         self.bn2 = nn.BatchNorm2d(out_ch)
         self.relu2 = nn.ReLU()
     
@@ -24,12 +24,12 @@ class encoder_block(nn.Module):
     
 
 class decoder_block(nn.Module):
-    def __init__(self, in_ch, out_ch, dilation):
+    def __init__(self, in_ch, out_ch):
         super().__init__()
-        self.conv1 = nn.Conv2d(in_ch, out_ch, kernel_size=3, stride=1, padding=dilation, dilation=dilation)  
+        self.conv1 = nn.Conv2d(in_ch, out_ch, kernel_size=3, stride=1, padding=1)  
         self.bn1 = nn.BatchNorm2d(out_ch)
         self.relu1 = nn.ReLU()
-        self.conv2 = nn.Conv2d(out_ch, out_ch, kernel_size=3, stride=1, padding=dilation, dilation=dilation) 
+        self.conv2 = nn.Conv2d(out_ch, out_ch, kernel_size=3, stride=1, padding=1) 
         self.bn2 = nn.BatchNorm2d(out_ch)
         self.relu2 = nn.ReLU()
     
@@ -73,18 +73,18 @@ class bottleneck_block(nn.Module):
 
 
 class Unet(nn.Module):
-    def __init__(self, num_classes, enc_dilation):
+    def __init__(self, num_classes):
         super().__init__()
-        self.enc1 = encoder_block(3, 64, enc_dilation[0])
-        self.enc2 = encoder_block(64, 128, enc_dilation[1])
-        self.enc3 = encoder_block(128, 256, enc_dilation[2])
-        self.enc4 = encoder_block(256, 512, enc_dilation[3])
+        self.enc1 = encoder_block(3, 64)
+        self.enc2 = encoder_block(64, 128)
+        self.enc3 = encoder_block(128, 256)
+        self.enc4 = encoder_block(256, 512)
         self.bottle = bottleneck_block(512, 1024, 1024)
 
-        self.dec1 = decoder_block(1024, 512, enc_dilation[3]) 
-        self.dec2 = decoder_block(512, 256, enc_dilation[2])
-        self.dec3 = decoder_block(256, 128, enc_dilation[1])
-        self.dec4 = decoder_block(128, 64, enc_dilation[0])
+        self.dec1 = decoder_block(1024, 512) 
+        self.dec2 = decoder_block(512, 256)
+        self.dec3 = decoder_block(256, 128)
+        self.dec4 = decoder_block(128, 64)
 
         self.up1 = upsample_block(1024, 512)
         self.up2 = upsample_block(512, 256)
@@ -92,7 +92,7 @@ class Unet(nn.Module):
         self.up4 = upsample_block(128, 64)
 
         self.head = nn.Conv2d(64, num_classes, kernel_size=3, stride=1, padding=1)
-        self.initialize_weights()
+        # self.initialize_weights()
             
 
     def forward(self, x):
@@ -126,15 +126,15 @@ class Unet(nn.Module):
         x = torch.sigmoid(x)
         return x
     
-    def initialize_weights(self):
-        for m in self.modules():
-            if isinstance(m, nn.Conv2d) or isinstance(m, nn.ConvTranspose2d):
-                nn.init.xavier_uniform_(m.weight)
-                if m.bias is not None:
-                    nn.init.zeros_(m.bias)
-            elif isinstance(m, nn.BatchNorm2d):
-                nn.init.ones_(m.weight)
-                nn.init.zeros_(m.bias)
+    # def initialize_weights(self):
+    #     for m in self.modules():
+    #         if isinstance(m, nn.Conv2d) or isinstance(m, nn.ConvTranspose2d):
+    #             nn.init.xavier_uniform_(m.weight)
+    #             if m.bias is not None:
+    #                 nn.init.zeros_(m.bias)
+    #         elif isinstance(m, nn.BatchNorm2d):
+    #             nn.init.ones_(m.weight)
+    #             nn.init.zeros_(m.bias)
 
 
 # if __name__ == "__main__":

@@ -1,39 +1,28 @@
-import os
 from torch.utils.data import Dataset
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
+from sklearn.model_selection import train_test_split
+from torch.utils.data import DataLoader
+from torch.utils.data import Subset
 from PIL import Image
 from glob import glob
 
 # Custom Dataset
 class Dancing_Dataset(Dataset):
-    def __init__(self, root_path):
-        # self.imgs_list = []
-        # self.masks_list = []
-
-        # imgs_path = os.path.join(root_path, "images").replace("\\", "/")
-        # masks_path = os.path.join(root_path, "masks").replace("\\", "/")
-
-        # for (path, _, files) in os.walk(imgs_path):
-        #     for filename in files:
-        #         ext = os.path.splitext(filename)[-1]
-        #         if ext == '.png':
-        #             target_img_path = os.path.join(path, filename)
-        #             target_mask_path = target_img_path.replace("images", "masks")
-        #             self.imgs_list.append(target_img_path)
-        #             self.masks_list.append(target_mask_path)
-
-        self.imgs_path = sorted(glob(f'{root_path}/images/*.png'))
-        self.masks_path = sorted(glob(f'{root_path}/masks/*.png'))
+    def __init__(self, args):
+        
+        self.imgs_path = sorted(glob(f'{args.data_folder}\images\*.png'))
+        self.masks_path = sorted(glob(f'{args.data_folder}\masks\*.png'))
+        # print(f"Found {len(self.imgs_path)} image files.")
 
         # Data Processing
         self.image_transform = transforms.Compose([
-                            transforms.Resize((512, 512)),
+                            transforms.Resize((256, 256)),
                             transforms.ToTensor(), 
                             transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
         ])
         self.mask_transform = transforms.Compose([
-                            transforms.Resize((512, 512), interpolation=InterpolationMode.NEAREST),
+                            transforms.Resize((256, 256), interpolation=InterpolationMode.NEAREST),
                             transforms.ToTensor(), 
         ])
 
@@ -54,6 +43,21 @@ class Dancing_Dataset(Dataset):
         tensor_mask = self.mask_transform(mask)
         
         return tensor_img, tensor_mask, img_name
+
+# data split
+def train_val_dataset(dataset, val_split=0.05):
+    train_idx, val_idx = train_test_split(list(range(len(dataset))), test_size=val_split)
+    datasets = {}
+    datasets['train'] = Subset(dataset, train_idx)
+    datasets['val'] = Subset(dataset, val_idx)
+    return datasets
+    
+def get_dataloader(args, datasets):
+    # Dataloader
+    train_loader = DataLoader(datasets['train'], batch_size=args.batch_size, shuffle=True)
+    test_loader = DataLoader(datasets['val'], batch_size=args.batch_size)
+
+    return train_loader, test_loader
 
 
 #if __name__ == "__main__":

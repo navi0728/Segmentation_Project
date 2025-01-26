@@ -1,0 +1,47 @@
+{
+    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+    // 기존 특성에 대한 설명을 보려면 가리킵니다.
+    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Python 디버거: 현재 파일",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },        
+        {
+            "name": "unet_train",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}${pathSeparator}unet_tiktok${pathSeparator}train.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}${pathSeparator}unet_tiktok",
+            "env": {"CUDA_VISIBLE_DEVICES":"0"}, // GPU 개수 안으로
+            "justMyCode": false,
+            "args": [
+                "--batch_size", "100",
+                "--epoch", "5",
+                "--result_root_folder", "saves",
+                "--lr", "0.001",
+                "--save_root_folder", "results",
+                "--data_folder", "data",
+            ]
+        },
+        {
+            "name": "unet_infer",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}${pathSeparator}unet_tiktok${pathSeparator}infer.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}${pathSeparator}unet_tiktok",
+            "env": {"CUDA_VISIBLE_DEVICES":"0"}, // GPU 개수 안으로
+            "justMyCode": false,
+            "args": [
+                
+            ]
+        },
+    ]
+}
