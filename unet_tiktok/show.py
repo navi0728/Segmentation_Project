@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import cv2
 
 
-original_image_path = r"C:\Users\minju\Desktop\code\unet_tiktok\data\images\108_00270.png"
-image_path1 = r"C:\Users\minju\Desktop\code\unet_tiktok\data\masks\108_00270.png"
-image_path2 = r"C:\Users\minju\Desktop\code\unet_tiktok\new_results\108_00270.png"
+original_image_path = r"C:\Users\minju\Documents\GitHub\Segmentation_Project\unet_tiktok\data\images\648_00120.png"
+image_path1 = r"C:\Users\minju\Documents\GitHub\Segmentation_Project\unet_tiktok\data\masks\648_00120.png"
+image_path2 = r"C:\Users\minju\Documents\GitHub\Segmentation_Project\unet_tiktok\new_results\648_00120.png"
 
 img = cv2.imread(original_image_path)
 img1 = cv2.imread(image_path1)
