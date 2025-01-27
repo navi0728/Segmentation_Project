@@ -1,9 +1,4 @@
-from utills.parse import parse_args
 from utills.dataset import Dancing_Dataset
-from utills.tools import get_params_json, get_result_folder
-from utills.dataset import train_val_dataset
-from utills.dataset import get_dataloader
-from utills.eval import val_segmentation
 from torch.optim.lr_scheduler import StepLR
 from networks.model import Unet
 from torch.optim import Adam
@@ -12,9 +7,15 @@ import torch.nn as nn
 import torch
 import os
 
+from utills.parse import parse_train_args
+from utills.tools import get_params_json, get_result_folder
+from utills.dataset import train_val_dataset,get_dataloader
+from utills.eval import val_segmentation
+from utills.get_module import data_post_processing
+
 
 def main():
-    args = parse_args()
+    args = parse_train_args()
 
     result_folder = get_result_folder(args)
     get_params_json(result_folder, args)
@@ -37,8 +38,8 @@ def main():
     ## Training
     best_iou = 0
 
-    loss_history = [] 
-    iou_history = []
+    # loss_history = [] 
+    # iou_history = []
 
     for i in range(args.epoch):
         for j, (tensor_img, tensor_mask, _) in enumerate(train_loader):
@@ -51,14 +52,14 @@ def main():
             loss.backward()
             optimizer.step()   
 
-            loss_history.append(loss.item())
+            # loss_history.append(loss.item())
 
             ## Validation
             if j % 100 == 0:
                 print(f'epoch : {i}/{args.epoch} | step : {j} | loss value : {loss}')
                                 
                 avg_iou = val_segmentation(args, model, val_loader)
-                iou_history.append(avg_iou)
+                # iou_history.append(avg_iou)
 
                 if avg_iou > best_iou:
                     print(f"모델 weight 저장. 이전 acc {best_iou*100:.2f}%, 갱신 acc {avg_iou*100:.2f}%")
@@ -71,8 +72,13 @@ def main():
 
         lr_scheduler.step()
 
+    data_post_processing(args)
+    
+
 if __name__ == '__main__':
     main()
+
+
 # # visualize loss trend
 # plt.figure(figsize=(10, 5))
 # plt.plot(loss_history, label='Training Loss')

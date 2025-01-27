@@ -1,7 +1,7 @@
 # Segmentation Task
 
-## Toy Project Topic
-- Human Segmentation using U-Net model with Kaggle image datasets
+## Toy Project 
+- Topic: Human Segmentation using U-Net model with Kaggle image datasets
 
 - Model: U-Net: Convolutional Networks for Biomedical Image Segmentation [paper](https://arxiv.org/abs/1505.04597) 
 
@@ -30,15 +30,22 @@ python train.py
 
 ## Structure
 ```
-.
+unet_tiktok
+│
+├── assets
 ├── date #Download dataset
 │   ├── images 
 │   └── masks
-├── new_results #Resized masks
+├── networks
+|   └── model.py
+├── new_results #Resize Predicted masks
 ├── results #Predicted masks
-├── dataset.py 
-├── model.py
-├── new_results.py
+├── saves
+|    └── 0000
+|    └──...
+├── utills
+├── infer.py
 ├── show.py
+├── test_img.png
 └── train.py
 ```

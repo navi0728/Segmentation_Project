@@ -60,7 +60,7 @@ def get_dataloader(args, datasets):
     return train_loader, test_loader
 
 
-#if __name__ == "__main__":
+# if __name__ == "__main__":
      #my_dataset = Dancing_Dataset(root_path="C:\\Users\\minju\Desktop\\code\\unet_tiktok\data")
      #img, mask,img_name = my_dataset.__getitem__(1)
      #print(img.shape, mask.shape) -> torch.Size([3, 512, 512]) torch.Size([1, 512, 512])

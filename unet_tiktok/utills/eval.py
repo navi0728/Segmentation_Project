@@ -36,6 +36,7 @@ def val_segmentation(args, model, val_loader):
                 result_mask = (result_mask * 255.0).astype(np.uint8)
 
                 result_img_path = os.path.join(args.save_root_folder, target_image_name)
+                result_img_path = result_img_path.replace("/", "\\")
                 cv2.imwrite(result_img_path, result_mask)
                 
             # v_predic : [B, 1, 256, 256]
