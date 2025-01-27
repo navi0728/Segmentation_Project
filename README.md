@@ -1,12 +1,21 @@
 # Segmentation Task
 
 ## Toy Project 
-- Topic: Human Segmentation using U-Net model with Kaggle image datasets
-
-- Model: U-Net: Convolutional Networks for Biomedical Image Segmentation [paper](https://arxiv.org/abs/1505.04597) 
+- **Topic**: Human Segmentation using U-Net model with Kaggle image datasets
+- **Model**: U-Net: Convolutional Networks for Biomedical Image Segmentation [paper](https://arxiv.org/abs/1505.04597) 
 
 ## 1. Download Dataset 
 - [Sketch Dataset](https://www.kaggle.com/datasets/tapakah68/segmentation-full-body-tiktok-dancing-dataset/data)
+- **EDA**  
+  - **Images**: Extracted from video frames  
+    - **Number**: 2615  
+    - **Shape**: (3, 960, 540)  
+  - **Masks**: Segmented images of dancing people  
+    - **Number**: 2615  
+    - **Shape**: (1, 960, 540)  
+  - **Features**:  
+    - No annotation file. Only masked image files.  
+    - Not split into train, validation, and test datasets.
 
 ## 2. Training And Validation
 ```
