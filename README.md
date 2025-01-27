@@ -22,6 +22,11 @@
 python train.py
 ```
 
+## 3. Inference
+```
+python infer.py
+```
+
 ## Results  
 
 ### Prediction
