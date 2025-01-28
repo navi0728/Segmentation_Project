@@ -5,7 +5,7 @@
 - **Model**: U-Net: Convolutional Networks for Biomedical Image Segmentation [paper](https://arxiv.org/abs/1505.04597) 
 
 ### Demo Video
-![Demo GIF](https://github.com/navi0728/Segmentation_Project/blob/main/unet_tiktok/assets/demo.gif)
+![Demo GIF](https://github.com/navi0728/Segmentation_Project/blob/main/unet_tiktok/assets/Demo.gif)
 
 ## 1. Download Dataset 
 - [Sketch Dataset](https://www.kaggle.com/datasets/tapakah68/segmentation-full-body-tiktok-dancing-dataset/data)
