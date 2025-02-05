@@ -23,7 +23,7 @@ def parse_infer_args():
 
     # 저장 폴더 관련
     parser.add_argument('--img_path', type=str, default='test_img.png', help='test할 이미지 이름')
-    parser.add_argument('--trained_folder', type=str, default='saves\\0000', help='학습된 weight와 json 파라미터 저장된 폴더')
+    parser.add_argument('--trained_folder', type=str, default='saves\\0002', help='학습된 weight와 json 파라미터 저장된 폴더')
     args = parser.parse_args()
 
     return args

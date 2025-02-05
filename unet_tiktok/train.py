@@ -73,7 +73,7 @@ def main():
         lr_scheduler.step()
 
     new_results_path = "./new_results"
-    data_post_processing(new_results_path, args)
+    #data_post_processing(new_results_path, args)
     
 
 if __name__ == '__main__':

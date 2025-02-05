@@ -7,6 +7,11 @@
 ### Demo Video
 ![Demo GIF](https://github.com/navi0728/Segmentation_Project/blob/main/unet_tiktok/assets/Demo.gif)
 
+## 0. Install Requirements
+```
+pip install -r requirements.txt
+```
+
 ## 1. Download Dataset 
 - [Sketch Dataset](https://www.kaggle.com/datasets/tapakah68/segmentation-full-body-tiktok-dancing-dataset/data)
 - **EDA**  
@@ -22,10 +27,11 @@
 
 ## 2. Training And Validation
 ```
-python train.py
+python train.py --batch_size 8 --epoch 35
 ```
 
 ## 3. Inference
+### Download Best.pt
 ```
 python infer.py
 ```
@@ -50,16 +56,17 @@ python infer.py
 unet_tiktok
 │
 ├── assets
-├── date #Download dataset
+├── date            # Download dataset
 │   ├── images 
 │   └── masks
 ├── networks
 |   └── model.py
-├── new_results #Resize Predicted masks
-├── results #Predicted masks
+├── new_results     # Resize Predicted masks
+├── results         # Predicted masks
 ├── saves
 |    └── 0000
 |    └──...
+├── app.py          # Demo with Gradio
 ├── utills
 ├── infer.py
 ├── show.py

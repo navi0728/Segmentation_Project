@@ -92,7 +92,7 @@ class Unet(nn.Module):
         self.up4 = upsample_block(128, 64)
 
         self.head = nn.Conv2d(64, num_classes, kernel_size=3, stride=1, padding=1)
-        # self.initialize_weights()
+        self.initialize_weights()
             
 
     def forward(self, x):
@@ -126,15 +126,15 @@ class Unet(nn.Module):
         x = torch.sigmoid(x)
         return x
     
-    # def initialize_weights(self):
-    #     for m in self.modules():
-    #         if isinstance(m, nn.Conv2d) or isinstance(m, nn.ConvTranspose2d):
-    #             nn.init.xavier_uniform_(m.weight)
-    #             if m.bias is not None:
-    #                 nn.init.zeros_(m.bias)
-    #         elif isinstance(m, nn.BatchNorm2d):
-    #             nn.init.ones_(m.weight)
-    #             nn.init.zeros_(m.bias)
+    def initialize_weights(self):
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d) or isinstance(m, nn.ConvTranspose2d):
+                nn.init.xavier_uniform_(m.weight)
+                if m.bias is not None:
+                    nn.init.zeros_(m.bias)
+            elif isinstance(m, nn.BatchNorm2d):
+                nn.init.ones_(m.weight)
+                nn.init.zeros_(m.bias)
 
 
 # if __name__ == "__main__":
