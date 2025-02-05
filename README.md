@@ -32,6 +32,7 @@ python train.py --batch_size 8 --epoch 35
 
 ## 3. Inference
 ### Download Best.pt
+- [Best.pt](https://drive.google.com/file/d/1vDveBSjH5Pedvgo76LK6ePyW8Vv0DmFJ/view?usp=drive_link)
 ```
 python infer.py
 ```
